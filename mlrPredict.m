@@ -18,9 +18,15 @@ function [label] = mlrPredict(W, X)
 
 intercept=ones(size(X,1),1);
 X=horzcat(intercept,X);
-output=sigmoid(X*W);
+%output=sigmoid(X*W);
 
-[~ , label]=max(output,[],2);
+ a=(X*W);    
+    
+ y=exp(a);
+ y_n=bsxfun(@rdivide, y, sum(y,2));
+
+
+[~ , label]=max(y_n,[],2);
 
 end
 

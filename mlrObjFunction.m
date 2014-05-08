@@ -26,9 +26,18 @@ W = reshape(W, size(X, 2) + 1, size(T, 2));
 
 intercept=ones(size(X,1),1);
 X=horzcat(intercept,X);
-y_n=sigmoid(X*W);
+a=X*W;
 
-error= sum(sum(y_n.*T));
+
+b=logsumexp(a,2);
+
+error1=-1* sum(sum(a.*T));
+error2=sum(b);
+
+error=error1+error2;
+
+y=exp(a);
+y_n=bsxfun(@rdivide, y, sum(y,2));
 
 temp=X'*(y_n-T);
 error_grad=temp(:);

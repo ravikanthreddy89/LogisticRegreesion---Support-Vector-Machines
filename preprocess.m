@@ -19,6 +19,7 @@ function [train_data, train_label, validation_data, ...
 
 load('mnist_all.mat');
 
+
 n_validation = 1000;
 
 validation_data = [train0(1:n_validation, :); train1(1:n_validation, :); ...
